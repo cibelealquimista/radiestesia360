@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Área de Membros - Terapeuta Hertz</title>
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png?v=20260923d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg-dark: #150c2c;
+    --bg-dark-2: #0b0616;
+    --pill: #17133a;
+    --pill-hover: #211a4a;
+    --accent-1: #9b3fd4;
+    --accent-2: #ec3f83;
+    --text-light: #f4eefb;
+    --text-dim: #b3a6c9;
+    --ink: #171325;
+    --ink-dim: #6b6480;
+    --line: #e7e2ef;
+    --agenda-verde: #3fb54c;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg-dark);
+    font-family:'Inter', sans-serif;
+    color:var(--text-light);
+  }
+
+  h1,h2,h3,.font-display{
+    font-family:'Poppins', sans-serif;
+  }
+
+  img{max-width:100%; display:block;}
+
+  button{font-family:inherit; cursor:pointer;}
+
+  /* =========================================================
+     LOGO DA MARCA (usado no bloco 1 e no rodape)
+  ========================================================== */
+
+  .marca{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .marca-logo{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+
+  .marca-logo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+
+  .marca-logo .logo-placeholder{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    border:2px solid var(--accent-1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    font-weight:700;
+    color:var(--accent-1);
+  }
+
+  .marca-nome{
+    font-weight:700;
+    font-size:19px;
+    letter-spacing:.01em;
+  }
+
+  /* =========================================================
+     BLOCO 1 - BANNERS
+  ========================================================== */
+
+  .bloco-banners{
+    position:relative;
+    background:
+      radial-gradient(ellipse 900px 500px at 78% 30%, rgba(155,63,212,.35), transparent 70%),
+      var(--bg-dark);
+    overflow:hidden;
+    padding:44px 0 70px;
+  }
+
+  .canal{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px 32px;
+  }
+
+  .carrossel{
+    position:relative;
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  .slides{
+    overflow:hidden;
+    border-radius:20px;
+  }
+
+  .slides-track{
+    display:flex;
+    transition:transform .5s cubic-bezier(.65,0,.35,1);
+  }
+
+  .slide{
+    flex:0 0 100%;
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:48px;
+    align-items:center;
+    padding:8px;
+  }
+
+  .slide-texto p.eyebrow{
+    color:var(--accent-2);
+    font-weight:600;
+    font-size:13px;
+    margin:0 0 14px;
+  }
+
+  .slide-texto h2{
+    font-size:42px;
+    font-weight:800;
+    line-height:1.12;
+    margin:0 0 20px;
+  }
+
+  .slide-texto p.desc{
+    color:var(--text-dim);
+    font-size:16px;
+    line-height:1.65;
+    max-width:46ch;
+    margin:0 0 30px;
+  }
+
+  .botao-gradiente{
+    display:inline-block;
+    background:linear-gradient(100deg, var(--accent-1), var(--accent-2));
+    color:#fff;
+    font-weight:700;
+    font-size:15px;
+    text-decoration:none;
+    padding:16px 30px;
+    border-radius:14px;
+    border:0;
+    box-shadow:0 10px 30px -10px rgba(236,63,131,.6);
+  }
+
+  .banner-media{
+    position:relative;
+    aspect-ratio:4/3;
+    border-radius:18px;
+    overflow:hidden;
+  }
+
+  .banner-media img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .banner-media-placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    height:100%;
+    padding:20px;
+    border:2px dashed rgba(244,238,251,.25);
+    border-radius:18px;
+    color:var(--text-dim);
+    font-size:13px;
+    line-height:1.6;
+  }
+
+  .carrossel-nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    margin-top:26px;
+  }
+
+  .carrossel-seta{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid rgba(244,238,251,.25);
+    background:transparent;
+    color:var(--text-light);
+    font-size:15px;
+  }
+
+  .carrossel-pontos{
+    display:flex;
+    gap:9px;
+  }
+
+  .ponto{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:rgba(244,238,251,.25);
+    border:0;
+    padding:0;
+  }
+
+  .ponto.ativo{
+    background:var(--accent-2);
+  }
+
+  /* =========================================================
+     BLOCO 2 - APPS + VIDEO
+  ========================================================== */
+
+  .bloco-meio{
+    background:#fff;
+    color:var(--ink);
+    padding:80px 32px;
+  }
+
+  .meio-grid{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:70px;
+    align-items:start;
+  }
+
+  .lista-apps{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  .app-pill{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:var(--pill);
+    color:#fff;
+    font-weight:600;
+    font-size:16px;
+    padding:20px 24px;
+    border-radius:40px;
+    border:0;
+    transition:background .15s ease, transform .15s ease;
+  }
+
+  .app-pill:hover{
+    background:var(--pill-hover);
+    transform:translateY(-1px);
+  }
+
+  .meio-texto h2{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:34px;
+    margin:0 0 18px;
+    text-align:center;
+  }
+
+  .meio-texto > p.intro{
+    text-align:center;
+    color:var(--ink-dim);
+    font-size:16px;
+    line-height:1.6;
+    max-width:52ch;
+    margin:0 auto 36px;
+  }
+
+  .video-caixa{
+    border:3px solid var(--ink);
+    border-radius:6px;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    background:#eee;
+    position:relative;
+  }
+
+  .video-caixa iframe,
+  .video-caixa video{
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+  }
+
+  .video-placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    text-align:center;
+    padding:20px;
+    color:#8a8398;
+    font-size:13px;
+    line-height:1.6;
+  }
+
+  .video-legenda{
+    text-align:center;
+    color:var(--ink-dim);
+    font-size:14px;
+    line-height:1.6;
+    max-width:56ch;
+    margin:22px auto 0;
+  }
+
+  /* =========================================================
+     BLOCO 3 - AGENDA DE AULAS AO VIVO
+  ========================================================== */
+
+  .bloco-agenda{
+    background:linear-gradient(160deg, #000000 0%, #2a1350 100%);
+    padding:70px 32px;
+  }
+
+  .agenda-topo{
+    max-width:1180px;
+    margin:0 auto 30px;
+  }
+
+  .agenda-titulo{
+    display:inline-block;
+    background:linear-gradient(100deg, var(--accent-1), var(--accent-2));
+    color:#fff;
+    font-weight:800;
+    font-size:28px;
+    letter-spacing:.02em;
+    padding:16px 30px;
+    border-radius:16px;
+    margin:18px 0 0;
+  }
+
+  .agenda-intro{
+    max-width:1180px;
+    margin:26px auto 40px;
+    text-align:center;
+    color:var(--text-light);
+    font-size:16px;
+    line-height:1.7;
+  }
+
+  .agenda-grid{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px 40px;
+  }
+
+  .aula-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .aula-sino{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+
+  .aula-sino svg{width:16px; height:16px; fill:#fff;}
+
+  .aula-pill{
+    flex:1;
+    display:block;
+    text-align:center;
+    background:var(--agenda-verde);
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:.02em;
+    padding:16px 20px;
+    border-radius:30px;
+  }
+
+  /* =========================================================
+     BLOCO 4 - RODAPE
+  ========================================================== */
+
+  .bloco-rodape{
+    background:linear-gradient(180deg, var(--bg-dark-2), #000);
+    padding:70px 32px 50px;
+  }
+
+  .rodape-topo{
+    max-width:1180px;
+    margin:0 auto 44px;
+  }
+
+  .rodape-grid{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:44px;
+    align-items:center;
+  }
+
+  .rodape-perfil{
+    display:flex;
+    gap:22px;
+    align-items:flex-start;
+  }
+
+  .rodape-foto{
+    width:96px;
+    height:96px;
+    border-radius:50%;
+    flex-shrink:0;
+    padding:3px;
+    background:linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  }
+
+  .rodape-foto img,
+  .rodape-foto .foto-placeholder{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+  }
+
+  .rodape-foto .foto-placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--bg-dark);
+    border:1px dashed rgba(244,238,251,.3);
+    font-size:10px;
+    text-align:center;
+    color:var(--text-dim);
+    padding:6px;
+  }
+
+  .rodape-bio p{
+    color:var(--text-dim);
+    font-size:14px;
+    line-height:1.7;
+    margin:0 0 12px;
+  }
+
+  .rodape-bio strong{
+    color:var(--text-light);
+  }
+
+  .rodape-divisor{
+    width:1px;
+    align-self:stretch;
+    background:rgba(244,238,251,.15);
+  }
+
+  .rodape-links{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .pill-outline{
+    display:block;
+    text-align:center;
+    color:var(--text-light);
+    text-decoration:none;
+    border:1px solid rgba(244,238,251,.35);
+    border-radius:30px;
+    padding:15px 24px;
+    font-weight:500;
+    font-size:15px;
+    transition:background .15s ease, color .15s ease;
+  }
+
+  .pill-outline:hover{
+    background:var(--text-light);
+    color:var(--ink);
+  }
+
+  .rodape-social{
+    display:flex;
+    gap:14px;
+    margin-top:26px;
+  }
+
+  .icone-social{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+  }
+
+  .icone-social svg{width:18px; height:18px;}
+
+  .rodape-copy{
+    max-width:1180px;
+    margin:50px auto 0;
+    padding-top:24px;
+    border-top:1px solid rgba(244,238,251,.1);
+    color:var(--text-dim);
+    font-size:12px;
+    text-align:center;
+  }
+
+  @media (max-width:860px){
+    .slide{grid-template-columns:1fr; gap:28px;}
+    .slide-texto h2{font-size:32px;}
+    .meio-grid{grid-template-columns:1fr;}
+    .agenda-grid{grid-template-columns:1fr;}
+    .rodape-grid{grid-template-columns:1fr; text-align:left;}
+    .rodape-divisor{display:none;}
+  }
+
+  /* =========================================================
+     VISUALIZADOR DE APP (tela cheia, sem os outros blocos)
+  ========================================================== */
+
+  .app-view{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#fff;
+    z-index:100;
+    flex-direction:column;
+  }
+
+  .app-view.aberto{display:flex;}
+
+  .app-barra{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:14px 20px;
+    border-bottom:1px solid var(--line);
+    background:#fafafa;
+    flex-shrink:0;
+  }
+
+  .voltar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--ink);
+    border:0;
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+    padding:10px 18px;
+    border-radius:20px;
+  }
+
+  .app-titulo{
+    font-weight:600;
+    color:var(--ink);
+    font-size:15px;
+  }
+
+  .app-frame-wrap{
+    flex:1;
+    position:relative;
+  }
+
+  .app-frame-wrap iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+
+</style>
+</head>
+<body>
+
+<div id="portal">
+
+  <!-- ================= BLOCO 1 - BANNERS ================= -->
+  
+  
+  <section class="bloco-banners">
+    <div class="canal">
+      <div class="marca" id="marcaTopo"></div>
+    </div>
+
+    <div class="carrossel">
+      <div class="slides">
+        <div class="slides-track" id="slidesTrack"></div>
+      </div>
+      <div class="carrossel-nav">
+        <button class="carrossel-seta" id="setaAnterior">&#8249;</button>
+        <div class="carrossel-pontos" id="pontos"></div>
+        <button class="carrossel-seta" id="setaProxima">&#8250;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BLOCO 2 - APPS + VIDEO ================= -->
+  <section class="bloco-meio">
+    <div class="meio-grid">
+      <div class="lista-apps" id="listaApps"></div>
+
+      <div class="meio-texto">
+        <h2>Bem-vindo a Área de Membros!</h2>
+        <p class="intro" id="introTexto"></p>
+        <div class="video-caixa" id="videoCaixa"></div>
+        <p class="video-legenda" id="videoLegenda"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BLOCO 3 - AGENDA DE AULAS AO VIVO ================= -->
+  <section class="bloco-agenda">
+    <div class="agenda-topo">
+      <div class="marca" id="marcaAgenda"></div>
+      <div class="agenda-titulo">AGENDA DE AULAS AO VIVO</div>
+    </div>
+    <p class="agenda-intro" id="agendaIntro"></p>
+    <div class="agenda-grid" id="agendaGrid"></div>
+  </section>
+
+  <!-- ================= BLOCO 4 - RODAPE ================= -->
+  <section class="bloco-rodape">
+    <div class="rodape-topo">
+      <div class="marca" id="marcaRodape"></div>
+    </div>
+
+    <div class="rodape-grid">
+      <div class="rodape-perfil">
+        <div class="rodape-foto" id="rodapeFoto"></div>
+        <div class="rodape-bio" id="rodapeBio"></div>
+      </div>
+
+      <div class="rodape-divisor"></div>
+
+      <div>
+        <div class="rodape-links" id="rodapeLinks"></div>
+        <div class="rodape-social" id="rodapeSocial"></div>
+      </div>
+    </div>
+
+    <div class="rodape-copy">&copy; Terapeuta Hertz. Todos os direitos reservados.</div>
+  </section>
+
+</div>
+
+<!-- ================= VISUALIZADOR DE APP ================= -->
+<div class="app-view" id="appView">
+  <div class="app-barra">
+    <button class="voltar" id="btnVoltar">&larr; Voltar</button>
+    <span class="app-titulo" id="appTitulo"></span>
+  </div>
+  <div class="app-frame-wrap">
+    <iframe id="appFrame" src="" title="Aplicativo"></iframe>
+  </div>
+</div>
+
+<script>
+
+  // =====================================================================
+  // CONFIGURACAO GERAL - edite tudo aqui, o resto do arquivo nao precisa
+  // ser mexido.
+  // =====================================================================
+
+  const NOME_MARCA = "Terapeuta Hertz";
+
+  // Logo redondo usado no topo do bloco 1, no bloco de agenda e no rodape.
+  // Coloque o arquivo (ex: "logo-360.png") na mesma pasta do index.html.
+  // Enquanto nao existir, aparece um circulo com "360" no lugar.
+  const LOGO = "logo.png?v=20260923c";
+
+  // ---- BLOCO 1: banners do carrossel ---------------------------------
+  // Voce disse que vai enviar a imagem e trocar a cor - assim que
+  // mandar, eu ajusto o gradiente de fundo do .bloco-banners para
+  // combinar com a nova arte.
+
+  const BANNERS = [
+    {
+      eyebrow: "Curso com Certificação",
+      titulo: "Desafio Astrológico",
+      descricao: "Aprenda a identificar os pontos obscuros do seu mapa astrologico e como desbloquear usando a radiestesia. Mesmo que voce nao entenda nada de astrologia.",
+      botaoTexto: "Saiba mais",
+      botaoLink: "https://chat.whatsapp.com/ExmJZT5KW2E4SrG57m8tvN",
+      imagem: "desafio-astrologico.png?v=20260923b",
+      imagemLabel: "IMAGEM: desafio-astrologico.png"
+    }
+  ];
+
+  // ---- BLOCO 2: aplicativos (lista da area de membros Hotmart) --------
+
+  const APPS = [
+    { nome: "Terapeuta Hertz Emissor", url: "https://blog.cibelefederighi.com.br/hertz/v7/index.html" },
+    { nome: "Terapeuta Hertz Binaural 360", url: "" },
+    { nome: "Editor Hertz de Áudio 360", url: "" },
+    
+  ];
+
+  // ---- BLOCO 2: texto de boas-vindas e video ---------------------------
+
+  const INTRO_TEXTO = "Você agora tem acesso a ferramentas exclusivas do Terapeuta Hertz para potencializar seus tratamentos.";
+
+  const VIDEO_LEGENDA = "Assista ao vídeo e descubra todas as ferramentas disponíveis para você como aluno, como acessar e como aproveitar melhor os recursos que preparei para apoiar seus estudos.";
+
+  // Opcao YouTube:  { tipo: "youtube", id: "wfnAOYkcXLg" }
+  // Opcao arquivo proprio: { tipo: "mp4", arquivo: "videos/explicacao.mp4" }
+  const VIDEO = { tipo: "youtube", id: "aw-bK7XjZLw", arquivo: "" };
+
+  // ---- BLOCO 3: agenda de aulas ao vivo ---------------------------------
+  // Cada item vira um botao verde. "link" deve ser o link do Google Meet
+  // (ou da pagina com a sala) daquele encontro. Adicione ou remova quantos
+  // quiser - o grid se ajusta sozinho, sempre em pares (2 colunas).
+
+  const AGENDA_INTRO = "Aqui você encontra os links oficiais do Terapeuta Hertz, com todas as datas das nossas aulas, mentorias e encontros ao vivo. Em cada evento, você tera acesso a data, horário e link do Google Meet para participar. Nos vemos ao vivo!";
+
+  const AULAS = [
+{ texto: "SETEMBRO 30/09 - 20H", link: "https://meet.google.com/sws-yhif-rco" },
+    { texto: "OUTUBRO 28/10 - 20H", link: "https://meet.google.com/pmr-bdrw-rtb" },
+    { texto: "NOVEMBRO 25/11 - 20H", link: "https://meet.google.com/jck-uxyq-fjj" }
+    ];
+
+  // ---- BLOCO 4: foto e bio ---------------------------------------------
+
+  const FOTO_PERFIL = "cibele.png?v=20260923b";
+
+  const BIO_HTML = `
+    <p>Eu sou <strong>Cibele Federighi</strong>,especialista em máquinas de radiônica, educadora e radiestesista, com mais de 20 anos de experiência no estudo e na aplicação das terapias integrativas.</p>
+    <p>Sou pos-graduada em Neurociência Psicologia da Consciência e Filosofia. Ao longo da minha trajetória, aprofundei meus estudos em Radiestesia, Radiônica, Astrologia, Cabalá, Geobiologia e Constelação Sistêmica.</p>
+    <p>Meu objetivo e ajudar terapeutas a ampliarem sua prática por meio da integração de técnicas milenares, conhecimento tradicional e ferramentas profissionais.</p>
+  `;
+
+  // ---- BLOCO 4: botoes extras (cursos, atendimento, links) -------------
+
+  const OFERTAS = [
+     { texto: "LINK DO DRIVE 📁", link: "https://drive.google.com/drive/folders/1pBAozQ0b8FkxQ8zL0OzSmxXiMIcCELEI?usp=sharing" },
+    { texto: "Conheca meus Cursos", link: "https://cibelefederighi.com.br/cursos-cibele-federighi/" },
+    { texto: "Agende um Atendimento", link: "https://cibelefederighi.com.br/atendimentos/" },
+    { texto: "Links importantes", link: "https://cibelefederighi.com.br/bio/" }
+  ];
+
+  // ---- BLOCO 4: redes sociais -------------------------------------------
+  // Deixe o link em branco ("") para o icone nao aparecer.
+
+  const SOCIAIS = {
+    facebook: "https://www.facebook.com/terapeuta360",
+    instagram: "https://www.instagram.com/metodoterapeuta360",
+    tiktok: "https://www.tiktok.com/@metodoterapeuta360",
+    youtube: "https://www.youtube.com/@Radiestesia360"
+  };
+
+  // =====================================================================
+  // A PARTIR DAQUI E LOGICA - normalmente nao precisa editar
+  // =====================================================================
+
+  function montarMarca(){
+    return `
+      <div class="marca-logo">
+        <img src="${LOGO}" alt="${NOME_MARCA}" onerror="this.outerHTML='<div class=\\'logo-placeholder\\'>360</div>';">
+      </div>
+      <span class="marca-nome">${NOME_MARCA}</span>
+    `;
+  }
+
+  document.getElementById('marcaTopo').innerHTML = montarMarca();
+  document.getElementById('marcaAgenda').innerHTML = montarMarca();
+  document.getElementById('marcaRodape').innerHTML = montarMarca();
+
+  document.getElementById('introTexto').textContent = INTRO_TEXTO;
+  document.getElementById('videoLegenda').textContent = VIDEO_LEGENDA;
+  document.getElementById('agendaIntro').textContent = AGENDA_INTRO;
+  document.getElementById('rodapeBio').innerHTML = BIO_HTML;
+
+  // ---- carrossel de banners ----
+
+  const track = document.getElementById('slidesTrack');
+  const pontosWrap = document.getElementById('pontos');
+  let slideAtual = 0;
+
+  BANNERS.forEach((b, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.innerHTML = `
+      <div class="slide-texto">
+        <p class="eyebrow">${b.eyebrow}</p>
+        <h2>${b.titulo}</h2>
+        <p class="desc">${b.descricao}</p>
+        <a class="botao-gradiente" href="${b.botaoLink}">${b.botaoTexto}</a>
+      </div>
+      <div class="banner-media">
+        <img src="${b.imagem}" alt="${b.titulo}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="banner-media-placeholder" style="display:none;">${b.imagemLabel}</div>
+      </div>
+    `;
+    track.appendChild(slide);
+
+    const ponto = document.createElement('button');
+    ponto.className = 'ponto' + (i === 0 ? ' ativo' : '');
+    ponto.addEventListener('click', () => irParaSlide(i));
+    pontosWrap.appendChild(ponto);
+  });
+
+  function irParaSlide(i){
+    slideAtual = (i + BANNERS.length) % BANNERS.length;
+    track.style.transform = `translateX(-${slideAtual * 100}%)`;
+    document.querySelectorAll('.ponto').forEach((p, idx) => {
+      p.classList.toggle('ativo', idx === slideAtual);
+    });
+  }
+
+  document.getElementById('setaAnterior').addEventListener('click', () => irParaSlide(slideAtual - 1));
+  document.getElementById('setaProxima').addEventListener('click', () => irParaSlide(slideAtual + 1));
+
+  if (BANNERS.length > 1) {
+    setInterval(() => irParaSlide(slideAtual + 1), 8000);
+  }
+
+  // ---- lista de apps ----
+
+  const listaApps = document.getElementById('listaApps');
+  const appView = document.getElementById('appView');
+  const appFrame = document.getElementById('appFrame');
+  const appTitulo = document.getElementById('appTitulo');
+
+  APPS.forEach(app => {
+    const btn = document.createElement('button');
+    btn.className = 'app-pill';
+    btn.textContent = app.nome;
+    btn.addEventListener('click', () => {
+      if (app.externo) {
+        window.open(app.url, '_blank', 'noopener');
+      } else {
+        abrirApp(app);
+      }
+    });
+    listaApps.appendChild(btn);
+  });
+
+  function abrirApp(app){
+    appFrame.src = app.url;
+    appTitulo.textContent = app.nome;
+    appView.classList.add('aberto');
+    window.scrollTo(0,0);
+  }
+
+  function fecharApp(){
+    appView.classList.remove('aberto');
+    appFrame.src = "";
+    appTitulo.textContent = "";
+  }
+
+  document.getElementById('btnVoltar').addEventListener('click', fecharApp);
+
+  // ---- video ----
+
+  const videoCaixa = document.getElementById('videoCaixa');
+
+  if (VIDEO.tipo === "youtube" && VIDEO.id) {
+    videoCaixa.innerHTML = `<iframe src="https://www.youtube.com/embed/${VIDEO.id}" allowfullscreen></iframe>`;
+  } else if (VIDEO.tipo === "mp4" && VIDEO.arquivo) {
+    videoCaixa.innerHTML = `<video src="${VIDEO.arquivo}" controls></video>`;
+  } else {
+    videoCaixa.innerHTML = `<div class="video-placeholder">VIDEO: preencha o objeto VIDEO no topo do script.</div>`;
+  }
+
+  // ---- agenda de aulas ao vivo ----
+
+  const agendaGrid = document.getElementById('agendaGrid');
+  const iconeSino = '<svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.1-1.6-5.6-4.5-6.3V4c0-.8-.7-1.5-1.5-1.5S10.5 3.2 10.5 4v.7C7.6 5.4 6 7.9 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>';
+
+  AULAS.forEach(aula => {
+    const item = document.createElement('div');
+    item.className = 'aula-item';
+    item.innerHTML = `
+      <div class="aula-sino">${iconeSino}</div>
+      <a class="aula-pill" href="${aula.link}" target="_blank" rel="noopener">${aula.texto}</a>
+    `;
+    agendaGrid.appendChild(item);
+  });
+
+  // ---- foto de perfil ----
+
+  document.getElementById('rodapeFoto').innerHTML = `
+    <img src="${FOTO_PERFIL}" alt="Foto de perfil" onerror="this.outerHTML='<div class=\\'foto-placeholder\\'>FOTO: ${FOTO_PERFIL}</div>';">
+  `;
+
+  // ---- botoes extras (ofertas) ----
+
+  const rodapeLinks = document.getElementById('rodapeLinks');
+  OFERTAS.forEach(o => {
+    const a = document.createElement('a');
+    a.className = 'pill-outline';
+    a.href = o.link;
+    a.textContent = o.texto;
+    a.target = "_blank";
+    a.rel = "noopener";
+    rodapeLinks.appendChild(a);
+  });
+
+  // ---- redes sociais ----
+
+  const ICONES = {
+    facebook: { cor: "#1877F2", svg: '<svg viewBox="0 0 24 24" fill="#fff"><path d="M13.5 21v-7.5h2.5l.5-3H13.5V8.5c0-.9.25-1.5 1.6-1.5H16.5V4.3C16 4.2 15 4 13.9 4c-2.3 0-3.9 1.4-3.9 4v2.5H7.5v3H10V21h3.5z"/></svg>' },
+    instagram: { cor: "#C13584", svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>' },
+    tiktok: { cor: "#000000", svg: '<svg viewBox="0 0 24 24" fill="#fff"><path d="M14 3c.3 1.8 1.5 3.2 3.4 3.6v2.4c-1.2 0-2.4-.4-3.4-1v6.3c0 3-2.4 5.2-5.2 5.2S3.6 17.3 3.6 14.3c0-2.9 2.3-5.1 5.1-5.2v2.5a2.7 2.7 0 1 0 2.7 2.7V3H14z"/></svg>' },
+    youtube: { cor: "#FF0000", svg: '<svg viewBox="0 0 24 24" fill="#fff"><path d="M21 8.5s-.2-1.5-.8-2.1c-.8-.8-1.6-.8-2-.9C15.6 5.3 12 5.3 12 5.3s-3.6 0-6.2.2c-.4 0-1.2.1-2 .9C3.2 7 3 8.5 3 8.5S2.8 10.2 2.8 12v0c0 1.8.2 3.5.2 3.5s.2 1.5.8 2.1c.8.8 1.8.8 2.3.9 1.7.2 7 .2 7 .2s3.6 0 6.2-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2.1.8-2.1s.2-1.7.2-3.5v0c0-1.8-.2-3.5-.2-3.5zM10 15V9l5.2 3-5.2 3z"/></svg>' }
+  };
+
+  const rodapeSocial = document.getElementById('rodapeSocial');
+  Object.keys(SOCIAIS).forEach(chave => {
+    const link = SOCIAIS[chave];
+    if (!link) return;
+    const icone = ICONES[chave];
+    const a = document.createElement('a');
+    a.className = 'icone-social';
+    a.href = link;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.style.background = icone.cor;
+    a.innerHTML = icone.svg;
+    rodapeSocial.appendChild(a);
+  });
+
+</script>
+
+</body>
+</html>
